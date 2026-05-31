@@ -1,7 +1,26 @@
+# OS
 .DS_Store
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.swp
+
+# Java
+*.class
+*.jar
+*.war
+
+# Maven
+target/
+
+# Environment
+.env
+.env.*
+
+# Misc
 coverage/
 dist/
 build/
 .tmp/
-.env
-.env.*
