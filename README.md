@@ -99,6 +99,38 @@ Create a wallet-to-wallet transfer.
 | 404    | Wallet not found            |
 | 422    | Insufficient balance        |
 
+### GET /wallets/{walletId}
+
+Get wallet balance.
+
+**Response (200 OK):**
+```json
+{
+  "id": "11111111-1111-1111-1111-111111111111",
+  "balance": 9000,
+  "createdAt": "2026-06-01T17:00:00Z",
+  "updatedAt": "2026-06-01T17:05:00Z"
+}
+```
+
+### GET /wallets/{walletId}/transfers
+
+Get transfer history for a wallet (as sender or receiver).
+
+**Response (200 OK):**
+```json
+[
+  {
+    "transferId": "a1b2c3d4-...",
+    "fromWalletId": "11111111-1111-1111-1111-111111111111",
+    "toWalletId": "22222222-2222-2222-2222-222222222222",
+    "amount": 1000,
+    "status": "PROCESSED",
+    "createdAt": "2026-06-01T17:00:00Z"
+  }
+]
+```
+
 ## Testing
 
 ### Run all tests
@@ -118,10 +150,11 @@ mvn test
 | Domain tests                 | 30    | Unit        | Wallet, Transfer, LedgerEntry, TransferStatus     |
 | Service tests                | 8     | Unit        | TransferService with mocked repos                 |
 | API integration tests        | 8     | Integration | End-to-end HTTP through real PostgreSQL            |
+| Wallet API tests             | 5     | Integration | Balance lookup, transfer history                   |
 | Concurrency tests            | 3     | Integration | Double-spend prevention, ledger balance, idempotency under concurrency |
 | Context load test            | 1     | Integration | Spring context boots successfully                 |
 
-**Total: 50 tests**
+**Total: 55 tests**
 
 ## Seed Data
 
